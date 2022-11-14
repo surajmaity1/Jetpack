@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -30,9 +32,18 @@ class MainActivity : ComponentActivity() {
             val painter = painterResource(id = R.drawable.flag)
             val description = "Indian Flag"
             val title = "India"
+
+            Box(modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .padding(16.dp)
+            ){
+                ImageCard(painter = painter,
+                    contentDescription = description,
+                    title = title)
+
+            }
             
-            ImageCard(painter = painter, contentDescription = description, title = title)
-            
+
         }
     }
 }
@@ -54,6 +65,18 @@ fun ImageCard(
                 painter = painter,
                 contentDescription = contentDescription,
                 contentScale = ContentScale.Crop
+            )
+            Box(modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        ),
+                        startY = 300f
+                    )
+                )
             )
             Box(
                 modifier = Modifier

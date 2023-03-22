@@ -30,12 +30,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                Column(
+                Row(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(Color.Cyan),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceAround
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Hello")
                     Text(text = "Nice")

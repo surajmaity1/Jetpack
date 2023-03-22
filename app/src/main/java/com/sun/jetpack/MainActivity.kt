@@ -1,11 +1,13 @@
 package com.sun.jetpack
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -29,8 +31,7 @@ import com.sun.jetpack.ui.theme.JetpackTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            // Use border():
+        setContent{
             Column(
                 modifier = Modifier
                     .background(Color.Yellow)
@@ -43,16 +44,18 @@ class MainActivity : ComponentActivity() {
                     .border(width = 16.dp, color = Color.Blue)
                     .padding(16.dp)
             ) {
-                Text(text = "Hey Coders!",
-                    modifier = Modifier
-                        .border(2.dp, Color.Black)
-                        .padding(10.dp)
-                        .offset(x = 20.dp, y = 30.dp)
-                        .border(6.dp, Color.Magenta)
-                )
-
+                Text(text = "Hey Coders!")
                 Spacer(modifier = Modifier.height(50.dp))
                 Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
+                Spacer(modifier = Modifier.height(50.dp))
+                Text(text = "Click Me",
+                    modifier = Modifier.clickable {
+                        Toast.makeText(this@MainActivity,
+                            "I told you \nI am clickable",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
             }
         }
     }

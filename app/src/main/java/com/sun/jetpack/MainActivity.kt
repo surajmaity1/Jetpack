@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(Color.Cyan),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Text(text = "Hello")
                     Text(text = "Nice")

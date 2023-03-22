@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -29,21 +30,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            setContent {
-
-                // Use Spacer():
-                Column(
-                    modifier = Modifier
-                        .background(Color.Yellow)
-                        .fillMaxHeight(0.5f)
-                        .fillMaxWidth()
-                        .padding(top = 50.dp)
-                ) {
-                    Text(text = "Hey Coders!",
-                        modifier = Modifier.offset(0.dp, 20.dp))
-                    Spacer(modifier = Modifier.height(50.dp))
-                    Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
-                }
+            // Use border():
+            Column(
+                modifier = Modifier
+                    .background(Color.Yellow)
+                    .fillMaxHeight(0.5f)
+                    .fillMaxWidth()
+                    .padding(top = 50.dp)
+                    .border(width = 2.dp, color = Color.Red)
+            ) {
+                Text(
+                    text = "Hey Coders!",
+                    modifier = Modifier.offset(0.dp, 20.dp)
+                )
+                Spacer(modifier = Modifier.height(50.dp))
+                Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
             }
         }
     }

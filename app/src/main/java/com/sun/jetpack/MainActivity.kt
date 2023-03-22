@@ -30,17 +30,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                Row(
+                //How to use the modifier to set the background, width, and fillMaxHeight?
+                Column(
                     modifier = Modifier
-                        .width(280.dp)
-                        .fillMaxHeight(0.8f)
-                        .background(Color.Cyan),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalAlignment = Alignment.CenterVertically
+                        .background(Color.Yellow)
+                        .fillMaxHeight(0.5f)
+                        .width(900.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "Hello")
-                    Text(text = "Nice")
-                    Text(text = "World")
+                    Text(text = "Hey Coders!")
+                    Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
                 }
             }
         }

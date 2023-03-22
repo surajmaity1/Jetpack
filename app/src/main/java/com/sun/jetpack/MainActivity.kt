@@ -29,63 +29,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.flag)
-            val description = "Indian Flag"
-            val title = "India"
-
-            Box(modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(16.dp)
-            ){
-                ImageCard(painter = painter,
-                    contentDescription = description,
-                    title = title)
-
+            setContent {
+                Greeting(name = "Suraj")
             }
-            
-
         }
     }
 }
-
 @Composable
-fun ImageCard(
-    painter: Painter,
-    contentDescription: String,
-    title: String,
-    modifier: Modifier = Modifier
-){
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(15.dp),
-        elevation = 5.dp
-    ) {
-        Box(modifier = Modifier.height(200.dp)) {
-            Image(
-                painter = painter,
-                contentDescription = contentDescription,
-                contentScale = ContentScale.Crop
-            )
-            Box(modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        ),
-                        startY = 300f
-                    )
-                )
-            )
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(12.dp),
-                contentAlignment = Alignment.BottomStart
-            ){
-                Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
-            }
-        }
-    }
+fun Greeting(name: String){
+    Text(text = "Hello $name!")
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview(){
+    Greeting(name = "Android")
 }

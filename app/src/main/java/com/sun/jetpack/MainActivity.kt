@@ -36,7 +36,12 @@ class MainActivity : ComponentActivity() {
                     .background(Color.Yellow)
                     .fillMaxHeight(0.5f)
                     .fillMaxWidth()
-                    .border(width = 2.dp, color = Color.Red)
+                    .border(width = 4.dp, color = Color.Red)
+                    .padding(4.dp)
+                    .border(width = 8.dp, color = Color.Green)
+                    .padding(8.dp)
+                    .border(width = 16.dp, color = Color.Blue)
+                    .padding(16.dp)
             ) {
                 Text(text = "Hey Coders!",
                     modifier = Modifier.offset(0.dp, 20.dp))

@@ -31,17 +31,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             setContent {
 
-                // Use of offset():
+                // Use Spacer():
                 Column(
                     modifier = Modifier
                         .background(Color.Yellow)
                         .fillMaxHeight(0.5f)
                         .fillMaxWidth()
-                        .padding(top = 60.dp, start = 88.dp)
+                        .padding(top = 50.dp)
                 ) {
                     Text(text = "Hey Coders!",
-                        modifier = Modifier.offset(100.dp, 70.dp)
-                            .background(Color.Green))
+                        modifier = Modifier.offset(0.dp, 20.dp))
+                    Spacer(modifier = Modifier.height(50.dp))
                     Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
                 }
             }

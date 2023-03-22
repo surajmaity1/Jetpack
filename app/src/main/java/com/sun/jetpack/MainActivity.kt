@@ -30,12 +30,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                // Use requiredWidth :
+                // Padding
                 Column(
                     modifier = Modifier
                         .background(Color.Yellow)
                         .fillMaxHeight(0.5f)
-                        .requiredWidth(900.dp)
+                        .fillMaxWidth()
+                        .padding(89.dp)
                 ) {
                     Text(text = "Hey Coders!")
                     Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")

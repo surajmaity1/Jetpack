@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
             setContent {
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize(0.5f)
                         .background(Color.Cyan),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically

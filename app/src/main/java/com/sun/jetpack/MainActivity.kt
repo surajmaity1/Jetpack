@@ -30,8 +30,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                Text(text = "Hello")
-                Text(text = "World")
+                Column {
+                    Text(text = "Hello")
+                    Text(text = "World")
+                }
             }
         }
     }

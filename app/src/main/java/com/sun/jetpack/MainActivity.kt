@@ -30,14 +30,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             setContent {
-                //How to use the modifier to set the background, width, and fillMaxHeight?
+                // Use requiredWidth :
                 Column(
                     modifier = Modifier
                         .background(Color.Yellow)
                         .fillMaxHeight(0.5f)
-                        .width(900.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                        .requiredWidth(900.dp)
                 ) {
                     Text(text = "Hey Coders!")
                     Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")

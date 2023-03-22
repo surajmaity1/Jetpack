@@ -31,13 +31,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             setContent {
 
-                // Padding
+                // Use of padding with x-axis and y-axis
                 Column(
                     modifier = Modifier
                         .background(Color.Yellow)
                         .fillMaxHeight(0.5f)
                         .fillMaxWidth()
-                        .padding(89.dp)
+                        .padding(top = 23.dp, start = 88.dp)
                 ) {
                     Text(text = "Hey Coders!")
                     Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")

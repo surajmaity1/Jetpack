@@ -31,15 +31,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             setContent {
 
-                // Use of padding with x-axis and y-axis
+                // Use of offset():
                 Column(
                     modifier = Modifier
                         .background(Color.Yellow)
                         .fillMaxHeight(0.5f)
                         .fillMaxWidth()
-                        .padding(top = 23.dp, start = 88.dp)
+                        .padding(top = 60.dp, start = 88.dp)
                 ) {
-                    Text(text = "Hey Coders!")
+                    Text(text = "Hey Coders!",
+                        modifier = Modifier.offset(100.dp, 70.dp)
+                            .background(Color.Green))
                     Text(text = "Get.. Set.. CODE ->>>>>>>>>>>")
                 }
             }

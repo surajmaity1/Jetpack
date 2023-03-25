@@ -11,16 +11,30 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
-    private val TAG = "CoroutineTest"
+    private val TAG = "SuspendFunctionTest"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent{
-            Text(text = "Coroutine Learning")
+            Text(text = "Suspend Function Learning")
         }
+
         GlobalScope.launch {
-            delay(5000L)
-            Log.d(TAG, "Coroutine wave Hello from ${Thread.currentThread().name}")
+            val network1 = demoNetworkCall1()
+            val network2 = demoNetworkCall2()
+
+            Log.d(TAG, network1)
+            Log.d(TAG, network2)
         }
-        Log.d(TAG, "Coroutine wave Hello from ${Thread.currentThread().name}")
+    }
+
+    suspend fun demoNetworkCall1(): String{
+        delay(4000L)
+        return "answer from demoNetworkCall1"
+    }
+
+    suspend fun demoNetworkCall2(): String{
+        delay(4000L)
+        return "answer from demoNetworkCall2"
     }
 }

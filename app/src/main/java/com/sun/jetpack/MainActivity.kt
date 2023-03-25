@@ -4,36 +4,31 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Text
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainActivity : ComponentActivity() {
 
-    private val TAG = "SuspendFunctionTest"
+    private val TAG = "CoroutineContextTest"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContent{
-            Text(text = "Suspend Function Learning")
+        setContent {
         }
-
         GlobalScope.launch {
-            val network1 = demoNetworkCall1()
-            val network2 = demoNetworkCall2()
-
-            Log.d(TAG, network1)
-            Log.d(TAG, network2)
+            Log.d(TAG, "Coroutine inside GlobalScope (Thread): ${Thread.currentThread().name}")
+            withContext(Dispatchers.Main) {
+                Log.d(TAG, "Setting Text (Thread): ${Thread.currentThread().name}")
+                // Implement seText to the UI
+                // like textView.setText = demoNetworkCall1()
+            }
         }
+        
     }
-
-    suspend fun demoNetworkCall1(): String{
+    suspend fun demoNetworkCall1(): String {
         delay(4000L)
         return "answer from demoNetworkCall1"
     }
 
-    suspend fun demoNetworkCall2(): String{
+    suspend fun demoNetworkCall2(): String {
         delay(4000L)
         return "answer from demoNetworkCall2"
     }

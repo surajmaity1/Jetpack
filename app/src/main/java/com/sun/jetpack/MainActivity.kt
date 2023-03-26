@@ -14,12 +14,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Coroutine job.cancel
+        // Note: Although job.cancel() is called
+        // as it is too busy, it can't take care of cancel() function
+
         val job = GlobalScope.launch {
-            repeat(10) {
-                Log.d(TAG, "Coroutine is still working ...")
-                delay(1000L)
-            }
+            Log.d(TAG, "Long running calculation is starting ...")
+
+            for (i in 30..40)
+                Log.d(TAG, "fibonacci for $i :${fibonacci(i)}")
+
+            Log.d(TAG, "Long running calculation ended.")
         }
 
         runBlocking {
@@ -30,5 +34,10 @@ class MainActivity : ComponentActivity() {
         setContent {
 
         }
+    }
+
+    fun fibonacci(n: Int) : Int{
+        if (n == 0 || n == 1) return n
+        return fibonacci(n-1) + fibonacci(n-2)
     }
 }

@@ -4,32 +4,64 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
-
-    private val TAG = "CoroutineContextTest"
+    private val TAG = "Coroutine runBlocking{}"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-        }
-        GlobalScope.launch {
-            Log.d(TAG, "Coroutine inside GlobalScope (Thread): ${Thread.currentThread().name}")
-            withContext(Dispatchers.Main) {
-                Log.d(TAG, "Setting Text (Thread): ${Thread.currentThread().name}")
-                // Implement seText to the UI
-                // like textView.setText = demoNetworkCall1()
-            }
-        }
-        
-    }
-    suspend fun demoNetworkCall1(): String {
-        delay(4000L)
-        return "answer from demoNetworkCall1"
-    }
+            Log.d(TAG, "Before runBlocking{}")
+            runBlocking {
+                // creating new Coroutine using launch{}
+                launch {
+                    Log.d(TAG, "Start of Coroutine 1")
+                    delay(3000L)
+                    Log.d(TAG, "End of Coroutine 1")
+                }
 
-    suspend fun demoNetworkCall2(): String {
-        delay(4000L)
-        return "answer from demoNetworkCall2"
+                // creating new Coroutine using launch{}
+                launch {
+                    Log.d(TAG, "Start of Coroutine 2")
+                    delay(3000L)
+                    Log.d(TAG, "End of Coroutine 2")
+                }
+
+                // creating new Coroutine using launch{}
+                launch {
+                    Log.d(TAG, "Start of Coroutine 3")
+                    delay(3000L)
+                    Log.d(TAG, "End of Coroutine 3")
+                }
+
+                Log.d(TAG, "Start of runBlocking{}")
+                delay(3000L)
+                Log.d(TAG, "End of runBlocking{}")
+            }
+            Log.d(TAG, "After runBlocking{}")
+
+            /*
+            Both are similar --
+
+            1. This is based on Thread
+
+            Log.d(TAG, "Before Thread.sleep()")
+            Thread.sleep(3000L)
+            Log.d(TAG, "After Thread.sleep()")
+
+
+            2. This is based on Coroutine
+
+            Log.d(TAG, "Before runBlocking{}")
+            runBlocking {
+                Log.d(TAG, "Start of runBlocking{}")
+                delay(3000L)
+                Log.d(TAG, "End of runBlocking{}")
+            }
+            Log.d(TAG, "After runBlocking{}")
+             */
+        }
     }
 }

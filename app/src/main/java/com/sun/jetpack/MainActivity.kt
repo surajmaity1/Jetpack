@@ -10,11 +10,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
-    private val TAG = "Coroutine Job"
+    private val TAG = "CoroutineJob"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Coroutine job.join
+        // Coroutine job.cancel
         val job = GlobalScope.launch {
             repeat(10) {
                 Log.d(TAG, "Coroutine is still working ...")
@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
         }
 
         runBlocking {
-            job.join()
+            delay(4000L)
+            job.cancel()
             Log.d(TAG, "Main thread is continuing ...")
         }
         setContent {

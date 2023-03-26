@@ -3,58 +3,39 @@ package com.sun.jetpack
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
-    private val TAG = "CoroutineJob"
+    private val TAG = "Coroutine Async and Await"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Note: Although job.cancel() is called
-        // as it is too busy, it can't take care of cancel() function
+        // Note: Here first networkCall1 and then networkCall2 will execute
+        // We can check total time using measureTimeMillis{}
+        GlobalScope.launch(Dispatchers.IO) {
+            val totalTime = measureTimeMillis {
+                val networkCall1 = demoNetworkCall1()
+                val networkCall2 = demoNetworkCall2()
 
-        val job = GlobalScope.launch {
-            Log.d(TAG, "Long running calculation is starting ...")
-
-            // Note: Using withTimeout(), we can cancel any long-running task after any specific time.
-            // we don't need any delay() function.
-
-            withTimeout(2000L){
-                for (i in 30..40) {
-                    /*
-                    Returns true when the current Job is still active (has not completed and was not cancelled yet).
-                    Check this property in long-running computation loops to support cancellation:
-
-                    while (isActive) {
-                        // do some computation
-                    }
-
-                    This property is a shortcut for coroutineContext.isActive in the scope when CoroutineScope is available. See coroutineContext, isActive and Job.isActive.
-                     */
-                    if (isActive) {
-                        Log.d(TAG, "fibonacci for $i :${fibonacci(i)}")
-                    }
-                }
+                Log.d(TAG, "Response from network1 ${demoNetworkCall1()}")
+                Log.d(TAG, "Response from network2 ${demoNetworkCall2()}")
             }
-            Log.d(TAG, "Long running calculation ended.")
-        }
-
-        /*
-        runBlocking {
-            delay(4000L)
-            job.cancel()
-            Log.d(TAG, "Job Canceled.")
-        }
-
-         */
-        setContent {
-
+            Log.d(TAG, "Time Taken: $totalTime ms.")
         }
     }
 
-    fun fibonacci(n: Int): Int {
-        if (n == 0 || n == 1) return n
-        return fibonacci(n - 1) + fibonacci(n - 2)
+    suspend fun demoNetworkCall1(): String {
+        delay(1000L)
+        return "answer from demoNetworkCall1"
+    }
+
+    suspend fun demoNetworkCall2(): String {
+        delay(1000L)
+        return "answer from demoNetworkCall2"
     }
 }

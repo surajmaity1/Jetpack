@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         // Note: Here first networkCall1 and then networkCall2 will execute
         // We can check total time using measureTimeMillis{}
 
-        // To solve this, we'll launch each coroutine for each networkCall, we'll using async
+        // To solve this, we'll launch each coroutine for each networkCall(), we'll using async
         GlobalScope.launch(Dispatchers.IO) {
 
             val totalTime = measureTimeMillis {

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class MainActivity : ComponentActivity() {
     private val TAG = "CoroutineJob"
@@ -20,24 +17,35 @@ class MainActivity : ComponentActivity() {
         val job = GlobalScope.launch {
             Log.d(TAG, "Long running calculation is starting ...")
 
-            for (i in 30..40)
-                Log.d(TAG, "fibonacci for $i :${fibonacci(i)}")
+            for (i in 30..40) {
+                /*
+                Returns true when the current Job is still active (has not completed and was not cancelled yet).
+                Check this property in long-running computation loops to support cancellation:
+                while (isActive) {
+                    // do some computation
+                }
 
+                This property is a shortcut for coroutineContext.isActive in the scope when CoroutineScope is available. See coroutineContext, isActive and Job.isActive.
+                 */
+                if (isActive) {
+                    Log.d(TAG, "fibonacci for $i :${fibonacci(i)}")
+                }
+            }
             Log.d(TAG, "Long running calculation ended.")
         }
 
         runBlocking {
             delay(4000L)
             job.cancel()
-            Log.d(TAG, "Main thread is continuing ...")
+            Log.d(TAG, "Job Canceled.")
         }
         setContent {
 
         }
     }
 
-    fun fibonacci(n: Int) : Int{
+    fun fibonacci(n: Int): Int {
         if (n == 0 || n == 1) return n
-        return fibonacci(n-1) + fibonacci(n-2)
+        return fibonacci(n - 1) + fibonacci(n - 2)
     }
 }

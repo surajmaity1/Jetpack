@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "829546306091",
+    "project_id": "jetpack-4c3de",
+    "storage_bucket": "jetpack-4c3de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829546306091:android:2e02a94c9f8830dc9c286e",
+        "android_client_info": {
+          "package_name": "com.sun.jetpack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829546306091-sabg4p3kvu49u2jmbtg3rumf54ncgna7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sun.jetpack",
+            "certificate_hash": "7b75098ff72b033522afe21a438d590329c564cd"
+          }
+        },
+        {
+          "client_id": "829546306091-e7ppibad1n00vaurkdkfh60t2632o2fe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbzRlgp2ykJID52xTGRBW-WuA1pTZ6iJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829546306091-e7ppibad1n00vaurkdkfh60t2632o2fe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

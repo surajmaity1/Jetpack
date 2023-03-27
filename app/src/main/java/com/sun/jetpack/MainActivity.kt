@@ -3,35 +3,44 @@ package com.sun.jetpack
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import androidx.activity.compose.setContent
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-data class Person(
-    val name: String = "",
-    val age: Int = -1
-)
+const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 class MainActivity : ComponentActivity() {
     private val TAG = "Coroutine"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val tutorialDocument = Firebase.firestore
-            .collection("coroutines")
-            .document("tutorial")
-        val peter = Person("Peter", 23)
+        val api = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(MyAPI::class.java)
+        
+        api.getComments().enqueue(object : Callback<List<Comment>> {
+            override fun onResponse(call: Call<List<Comment>>, response: Response<List<Comment>>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        for (comment in it) {
+                            Log.d(TAG, comment.toString())
+                        }
+                    }
+                }
+            }
 
-        GlobalScope.launch(Dispatchers.IO) {
-            delay(3000L)
-            tutorialDocument.set(peter).await()
+            override fun onFailure(call: Call<List<Comment>>, t: Throwable) {
+                Log.d(TAG, "Error: $t")
+            }
+        })
+        setContent {
 
-            val person = tutorialDocument.get()
-                .await().toObject(Person::class.java)
-
-            // Printing in logcat
-            Log.d(TAG, "Message: ${person.toString()}")
         }
     }
 }

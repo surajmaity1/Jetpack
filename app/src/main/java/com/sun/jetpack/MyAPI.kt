@@ -1,9 +1,9 @@
 package com.sun.jetpack
 
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 
 interface MyAPI {
     @GET("/comments")
-    fun getComments(): Call<List<Comment>>
+    suspend fun getComments(): Response<List<Comment>>
 }

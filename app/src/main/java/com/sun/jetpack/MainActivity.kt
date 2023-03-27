@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
+import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://jsonplaceholder.typicode.com/"
@@ -23,22 +20,44 @@ class MainActivity : ComponentActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(MyAPI::class.java)
-        
-        api.getComments().enqueue(object : Callback<List<Comment>> {
-            override fun onResponse(call: Call<List<Comment>>, response: Response<List<Comment>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        for (comment in it) {
-                            Log.d(TAG, comment.toString())
-                        }
-                    }
+
+        GlobalScope.launch {
+
+            // The way we prefer to use Coroutine with Retrofit
+            // Another way to use Coroutine with Retrofit
+            val response = api.getComments()
+
+            if (response.isSuccessful) {
+                for (item in response.body()!!) {
+                    Log.d(TAG, item.toString())
                 }
             }
 
-            override fun onFailure(call: Call<List<Comment>>, t: Throwable) {
-                Log.d(TAG, "Error: $t")
+            /*
+            Note: How to get response object of retrofit request
+            If an error occurred, now, we can handle it ...
+
+            val response = api.getComments().awaitResponse()
+
+            if (response.isSuccessful) {
+                for (item in response.body()!!) {
+                    Log.d(TAG, item.toString())
+                }
             }
-        })
+             */
+
+
+
+            /*
+            Here, we're getting list of comment directly
+            Note: Here, if an error occurred, now, we can handle it ...
+
+            val answer = api.getComments().await()
+            for (ans in answer){
+                Log.d(TAG, ans.toString())
+            }
+             */
+        }
         setContent {
 
         }

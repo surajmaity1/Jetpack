@@ -3,109 +3,87 @@ package com.sun.jetpack
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.*
 
-const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 class MainActivity : ComponentActivity() {
-    private val TAG = "Coroutine"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            val job = launch {
-                try {
-                    delay(500L)
-                }catch (e: Exception){
-                    e.printStackTrace()
+        setContent {
+            var sizeState by remember {
+                mutableStateOf(100.dp)
+            }
+
+            val size by animateDpAsState(
+                targetValue = sizeState,
+                tween(
+                    durationMillis = 2000
+                )
+                /* 3.keyframes{} animation
+                keyframes {
+                    durationMillis = 5000
+                    sizeState at 0 with LinearEasing
+                    sizeState * 1.5f at 2500 with LinearOutSlowInEasing
+                    sizeState * 2f at 5000
                 }
-                println("Coroutine 1 finished")
-            }
-            delay(300L)
-            job.cancel()
-        }
 
-        /*
-        val handler = CoroutineExceptionHandler { _, throwable ->
-            println("Caught Exception: $throwable")
-        }
-        CoroutineScope(Dispatchers.Main + handler).launch {
-            supervisorScope {
-                launch {
-                    delay(500L)
-                    throw Exception("Coroutine 1 Finished")
+                 */
+
+                /*2. spring() animation
+                spring(
+                    dampingRatio = Spring.DampingRatioHighBouncy
+                )*/
+
+
+                /*1. tween () animation
+                tween(
+                    durationMillis = 2000,
+                    delayMillis = 200,
+                    easing = LinearOutSlowInEasing
+                )
+                */
+            )
+
+            // Color animation : One color to another color with reverse ...
+
+            val infiniteTransition = rememberInfiniteTransition()
+            val customizeColor by infiniteTransition.animateColor(
+                initialValue = Color.Cyan,
+                targetValue = Color.Blue,
+                animationSpec = infiniteRepeatable(
+                    tween(
+                        durationMillis = 1500
+                    ),
+                    repeatMode = RepeatMode.Reverse
+                )
+            )
+
+            Box(
+                modifier = Modifier
+                    .background(customizeColor)
+                    .size(size),
+                contentAlignment = Alignment.Center
+            ){
+                Button(onClick = {
+                    sizeState += 40.dp
+                }) {
+                    Text(text = "Make Larger")
                 }
-                launch {
-                    delay(500L)
-                    println("Coroutine 2 Failed")
-                }
             }
         }
-
-         */
-
-
-
-        /*
-        val handler = CoroutineExceptionHandler { _, throwable ->
-            println("Caught Exception: $throwable")
-        }
-
-        lifecycleScope.launch(handler) {
-            throw Exception("Error")
-        }
-
-         */
-
-        /*
-        val deferred = lifecycleScope.async {
-            val string = async {
-                delay(800L)
-                throw Exception("Error")
-                "Result"
-            }
-            //string.await()
-        }
-        lifecycleScope.launch {
-//            deferred.await()
-            try {
-                deferred.await()
-            }catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-         */
-
-
-        /*
-        lifecycleScope.async {
-            val deferredTypeOfString = async {
-                delay(800L)
-                throw Exception("Error")
-                "Result"
-            }
-            //string.await()
-        }
-
-         */
-
-
-        /*
-        Exception can't be handled using simply try catch block
-        So, it'll give error
-        lifecycleScope.launch {
-            try {
-                launch {
-                    throw Exception()
-                }
-            } catch (e: Exception) {
-                println("Exception handled.")
-            }
-        }
-
-         */
     }
 }

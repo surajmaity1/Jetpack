@@ -15,3 +15,10 @@ To Learn Jetpack Compose, I have shared free resources ( Videos, Docs etc ... )
 ## Learning Resources
 - [Kotlin Basics](https://www.youtube.com/playlist?list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR) - by Sriyank Siddhartha
 - [Youtube Tutorials](https://www.youtube.com/playlist?list=PLQkwcJG4YTCSpJ2NLhDTHhi6XBNfk9WiC) - by Philipp Lackner
+
+
+# Connect with me
+If you face any issues while learning Android, feel free to ask questions here -> [Discord Server](https://discord.gg/ZhbqDN9fz4)
+- [LinkedIn](https://www.linkedin.com/in/suraj-maity-2919571a4/)
+- [Twitter](https://twitter.com/surajmyt)
+- [GitHub](https://github.com/surajmaity1)

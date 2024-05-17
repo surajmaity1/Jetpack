@@ -1,4 +1,4 @@
-package com.sun.jetpack
+package com.surajmyt.myapplication
 
 import org.junit.Test
 

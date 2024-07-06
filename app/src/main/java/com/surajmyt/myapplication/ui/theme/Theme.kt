@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -81,10 +80,9 @@ private val DarkColors = darkColorScheme(
 )
 
 @Composable
-fun UnscrambleTheme(
+fun CupcakeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    // Dynamic color in this app is turned off for learning purposes
+    // Dynamic color is available on Android 12+ but turned off for training purposes
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
@@ -97,22 +95,18 @@ fun UnscrambleTheme(
         darkTheme -> DarkColors
         else -> LightColors
     }
-
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat
-                .getInsetsController(window, view)
-                .isAppearanceLightStatusBars = darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content,
-        shapes = Shapes
+        content = content
     )
 }
